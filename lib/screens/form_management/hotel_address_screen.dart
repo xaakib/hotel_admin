@@ -2,25 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel_admin/components/TextFieldContainerDEcoration.dart';
 import 'package:hotel_admin/components/register_form_bar.dart';
-import 'package:hotel_admin/screens/form_management/hotel_address_screen.dart';
+import 'package:hotel_admin/screens/form_management/hotel_information_screen.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+class HotelAddresscreen extends StatefulWidget {
+  const HotelAddresscreen({Key? key}) : super(key: key);
 
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _HotelAddresscreenState createState() => _HotelAddresscreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _HotelAddresscreenState extends State<HotelAddresscreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController usernameCotnroller = TextEditingController();
-  final TextEditingController passowrdCotnroller = TextEditingController();
-  final TextEditingController confirmCotnroller = TextEditingController();
-  final TextEditingController hotelNameCotnroller = TextEditingController();
-  final TextEditingController hotelOwnerNameCotnroller =
-      TextEditingController();
-  final TextEditingController emailCotnroller = TextEditingController();
-  final TextEditingController mobileNumberCotnroller = TextEditingController();
+  final TextEditingController telephone = TextEditingController();
+  final TextEditingController faxNumber = TextEditingController();
+  final TextEditingController roadHousNumber = TextEditingController();
+  final TextEditingController zipCode = TextEditingController();
+  final TextEditingController writCompanyAddress = TextEditingController();
+  final TextEditingController comments = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   RegisterFormbar(
-                    title: "Account Information",
+                    title: "Hotel-Address",
                   ),
                   SizedBox(height: 10),
                   TextFieldContainerDEcoration(
@@ -51,7 +49,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         return null;
                       },
                       decoration: InputDecoration(
-                          border: InputBorder.none, hintText: "User Name"),
+                          border: InputBorder.none,
+                          hintText: "Telephone Number"),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -65,7 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         return null;
                       },
                       decoration: InputDecoration(
-                          border: InputBorder.none, hintText: "Password"),
+                          border: InputBorder.none, hintText: "Fax Number"),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -80,12 +79,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Confirm Password"),
+                          hintText: "Road/House Number"),
                     ),
                   ),
                   SizedBox(height: 10),
                   TextFieldContainerDEcoration(
                     child: TextFormField(
+                      textAlign: TextAlign.start,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                          border: InputBorder.none, hintText: "Zip Code"),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    alignment: Alignment.center,
+                    height: 100,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10,
+                    ),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            offset: Offset(0, 2),
+                            blurRadius: 6,
+                          ),
+                        ]),
+                    child: TextFormField(
+                      maxLines: 4,
                       textAlign: TextAlign.start,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -95,21 +125,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Hotel Owner Name"),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  TextFieldContainerDEcoration(
-                    child: TextFormField(
-                      textAlign: TextAlign.start,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          border: InputBorder.none, hintText: "Email"),
+                          hintText: "Write Copany Address"),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -128,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "Hotel Type",
+                    "Select Division",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 10),
@@ -150,16 +166,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                   ),
                   SizedBox(height: 20),
-                  Container(
-                    height: 35,
-                    alignment: Alignment.topRight,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.to(HotelAddresscreen(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: 35,
+                        alignment: Alignment.topRight,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: Text("previous"),
+                        ),
+                      ),
+                      Container(
+                        height: 35,
+                        alignment: Alignment.topRight,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(HotelInformationScreen(),
                               transition: Transition.rightToLeftWithFade);
-                      },
-                      child: Text("Next"),
-                    ),
+                          },
+                          child: Text("Next"),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -170,6 +201,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  String dropdownvalue = 'Hotel';
-  var items = ['Hotel', 'Lodge', 'Resort', 'Banglo', 'Cottage', 'Guest House'];
+  String dropdownvalue = 'Select Division';
+  var items = [
+    'Select Division',
+    'Chattagram',
+    'Rajshahi',
+    'Khulna',
+    'Barisal',
+    'Sylhet'
+  ];
 }

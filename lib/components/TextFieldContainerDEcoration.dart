@@ -8,10 +8,9 @@ class TextFieldContainerDEcoration extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
+      alignment: Alignment.center,
       height: size.height * 0.06,
-      padding: EdgeInsets.symmetric(
-        horizontal: 10,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 10,),
       width: double.infinity,
       decoration: BoxDecoration(
           color: Colors.white,
